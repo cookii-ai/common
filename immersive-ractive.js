@@ -86,9 +86,9 @@
           if (start !== -1 && end > start) stripped = stripped.slice(start, end + 1);
         }
 
-        // 优先使用 jsonrepair 修复残缺/非标准 JSON（如 AI 流式截断、单引号、末尾逗号等）
-        var repairFn = typeof JSONRepair !== 'undefined' ? JSONRepair.jsonrepair : null;
-        obj = JSON.parse(repairFn ? repairFn(stripped) : stripped);
+        // 使用 cookiiJsonParser 修复残缺/非标准 JSON（如 AI 流式截断、单引号、末尾逗号等）
+        obj = cookiiJsonParser(stripped);
+
         console.log('[ImmersiveRactive] JSON parsed:', obj);
       }
       catch (e) {
