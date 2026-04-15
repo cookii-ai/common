@@ -390,13 +390,18 @@
    */
   function saveState(app) {
     var key = resolveStorageKey();
-    console.log('[ImmersiveRactive] saveState: ', key);
+    if (!key) return;
+    console.log('[ImmersiveRactive] Enter saveState: ', key);
+    if (key.startsWith('immersive_ractive::/kitchen') && !key.includes('::v_')) {
+      return;
+    }
     try {
       var state = app.get();
       localStorage.setItem(key, JSON.stringify(state));
     } catch (e) {
       console.error('[ImmersiveRactive] saveState error:', e.message);
     }
+    console.log('[ImmersiveRactive] saveState ok: ', key);
   }
 
   // ─── loadState ────────────────────────────────────────────────────────────
